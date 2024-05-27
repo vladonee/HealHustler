@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to HealHustler</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="background"></div>
+
+  <div id="header-filler"></div>
+  <h1 id="header-text">Heal Hustler</h1>
+
+  
+  <div id="meniu">
+    <ul>
+      <li><a href="./home.html">Lista Pacienti</a></li>
+      <li><a href="./comandsHistory.html">Istoric Comenzi</a></li>
+    </ul>
+    <div id='auth-btn-container'>
+      <button type="submit" id="logout-button">Log out</button>
+    </div>
+  </div>
+  
+  <div class="content-container">
+    <p id="text">Se încarcă...</p>
+  </div>
+</body>
+<script type="module" src="./logoutButton.js"></script>
+<script type="module" src="./home.js"></script>
+<script type="module" src="./robotAlarms.js"></script>
+</html>

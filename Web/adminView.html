@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hospital Map</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="background"></div>
+
+  <div id="header-filler"></div>
+  <h1 id="header-text">Heal Hustler</h1>
+  
+  <div id="meniu" style="height: 20px;">
+    <div id='auth-btn-container'>
+      <button type="submit" id="logout-button">Log out</button>
+    </div>
+  </div>
+
+  <div class="content-container">
+    <h1>Harta Spitalului</h1>
+    <canvas id="hospitalMap" width="800" height="600" style="border:1px solid #000; border-radius: 4px;"></canvas>
+    
+    <div id="map-edit-btns">
+      <button id="add-room-button">Add Room</button>
+      <button id="delete-room-button">Delete Room</button>
+      <button id="edit-room-button">Edit Room</button>
+      <button id="draw-route-button">Draw Route</button>
+    </div>
+    
+    <form id="add-room-form" style="display: none;">
+      <label for="room-label">Numele camerei:</label>
+      <input type="text" id="room-label" name="room-label" required>
+      <button type="submit" id="btn-add-room">Add</button>
+      <button type="button" id="cancel-add-room">Cancel</button>
+    </form>
+
+    <form id="delete-room-form" style="display: none;">
+      <label for="delete-room-select">Sterge camera:</label>
+      <select id="delete-room-select" name="delete-room-select" required></select>
+      <button type="submit" id="btn-delete-room">Delete</button>
+      <button type="button" id="cancel-delete-room">Cancel</button>
+    </form>
+
+    <form id="edit-room-form" style="display: none;">
+      <label for="edit-room-select">Editeaza camera:</label>
+      <select id="edit-room-select" name="edit-room-select" required></select>
+      <label for="new-room-label">Camera noua:</label>
+      <input type="text" id="new-room-label" name="new-room-label" required>
+      <button type="submit" id="btn-edit-room">Edit</button>
+      <button type="button" id="cancel-edit-room">Cancel</button>
+    </form>
+    
+  </div>
+</body>
+
+<script type="module" src="./logoutButton.js"></script>
+<script type="module" src="./adminCheck.js"></script>
+<script type="module" src="./adminMap.js"></script>
+</html>

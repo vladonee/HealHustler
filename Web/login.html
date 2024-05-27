@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to HealHustler</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="background"></div>
+  
+  <div class="login-container">
+    <h2 id="login-heading">Bine ați venit la <br> HealHustler</h2>
+    <form id="login-form">
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Parolă" required>
+      <button type="submit" id="submitLogin">Autentificare</button>
+    </form>
+    <h4 id="login-signin-text">Nu aveti un cont? <a href="./index.html">Sign in</a></h4>
+  </div>
+</body>
+
+<script type="module" src="./login.js"></script>
+<script type="module" src="./checkAuth.js"></script>
+</html>

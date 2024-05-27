@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to HealHustler</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="background"></div>
+
+  <div id="header-filler"></div>
+  <h1 id="header-text">Heal Hustler</h1>
+  
+  <div id="meniu">
+    <ul>
+      <li><a href="./comandsHistory.html">Istoric Comenzi</a></li>
+      <li><a href="./robotAlarms.html">Alarme Generate de Robot</a></li>
+    </ul>
+    <div id='auth-btn-container'>
+      <button type="submit" id="logout-button">Log out</button>
+    </div>
+  </div>
+
+  <div class="content-container">
+    <div class="patient-details-container">
+      <h1>Detalii Pacient</h1>
+      <div id="patient-details">
+        <p>Se încarcă...</p>
+      </div>
+      <div id="medicine-order-container" style="display: none;">
+        <label for="medicine-select">Alege un medicament:</label>
+        <select id="medicine-select" size="4"></select>
+        <button id="med-command-btn">Comanda medicamente</button>
+        <div id="medicine-orders">
+          <h2>Comenzi Medicamente</h2>
+          <ul id="orders-list"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script type="module" src="./logoutButton.js"></script>
+<script type="module" src="./home.js"></script>
+<script type="module" src="./patient.js"></script>
+</html>

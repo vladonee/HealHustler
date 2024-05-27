@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to HealHustler</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="background"></div>
+
+  <div id="header-filler"></div>
+  <h1 id="header-text">Heal Hustler</h1>
+  
+  <div id="meniu">
+    <ul>
+      <li><a href="./comandsHistory.html">Istoric Comenzi</a></li>
+      <li><a href="./robotAlarms.html">Alarme Generate de Robot</a></li>
+    </ul>
+    <div id='auth-btn-container'>
+      <button type="submit" id="logout-button">Log out</button>
+    </div>
+  </div>
+
+  <div class="content-container">
+    <div id="search-add-heading">
+      <div id="search-container">
+        <input type="text" id="search-bar" placeholder="Căutare pacienți">
+        <button id="search-button">Căutare</button>
+      </div>
+      <button id="add-button">Add</button>
+    </div>
+    <p id="text">Se încarcă...</p>
+  </div>
+
+  <div id="add-patient-form" class="hidden">
+    <h2>Adăugare pacient nou</h2>
+    <form id="add-form">
+      <input type="text" id="add-last_name" placeholder="Nume de familie" required>
+      <input type="text" id="add-first_name" placeholder="Prenume" required>
+      <input type="email" id="add-email" placeholder="Email" required>
+      <input type="number" id="add-age" placeholder="Vârstă" required>
+      <input type="text" id="add-cnp" placeholder="CNP" required>
+      <input type="text" id="add-country" placeholder="Țară" required>
+      <input type="text" id="add-county" placeholder="Județ" required>
+      <input type="text" id="add-city" placeholder="Oraș" required>
+      <input type="text" id="add-street" placeholder="Stradă" required>
+      <input type="number" id="add-street_number" placeholder="Nr." required>
+      <input type="text" id="add-apartment_building" placeholder="Bloc" required>
+      <input type="text" id="add-apartment" placeholder="Apartament" required>      
+      <input type="tel" id="add-phone" placeholder="Telefon" required>
+      <input type="text" id="add-job" placeholder="Job" required>
+      <input type="text" id="add-workplace" placeholder="Loc de munca" required>
+      <input type="text" id="add-diagnosis" placeholder="Diagnostic" required>
+      <textarea id="add-other_observations" placeholder="Alte Observatii" required></textarea>
+      <input type="text" id="add-corridor" placeholder="Coridor" required>
+      <input type="text" id="add-room_number" placeholder="Număr cameră" required>
+      <input type="text" id="add-bed_number" placeholder="Număr pat" required>
+      <div id="add-patient-form-btn">
+        <button type="submit" id="add-patient-btn">Adaugă pacient</button>
+        <button type="button" id="add-btn-cancel">Anulează</button>
+      </div>
+    </form>
+  </div>
+
+  <div id="edit-patient-form" class="hidden">
+    <h2 id="login-heading">Editare pacient</h2>
+    <form id="patient-form">
+      <label for="last_name">Nume de familie:</label>
+      <input type="text" id="last_name" placeholder="Nume de familie" required>
+      <label for="first_name">Prenume:</label>
+      <input type="text" id="first_name" placeholder="Prenume" required>
+      <label for="email">Email:</label>
+      <input type="email" id="email" placeholder="Email" required>
+      <label for="age">Vârstă:</label>
+      <input type="number" id="age" placeholder="Vârstă" required>
+      <label for="cnp">CNP:</label>
+      <input type="text" id="cnp" placeholder="CNP" required>
+      <label for="country">Țară:</label>
+      <input type="text" id="country" placeholder="Țară" required>
+      <label for="county">Județ:</label>
+      <input type="text" id="county" placeholder="Județ" required>
+      <label for="city">Oraș:</label>
+      <input type="text" id="city" placeholder="Oraș" required>
+      <label for="street">Stradă:</label>
+      <input type="text" id="street" placeholder="Stradă" required>
+      <label for="street_number">Nr.:</label>
+      <input type="number" id="street_number" placeholder="Nr." required>
+      <label for="apartment_building">Bloc:</label>
+      <input type="text" id="apartment_building" placeholder="Bloc" required>
+      <label for="apartment">Apartament:</label>
+      <input type="text" id="apartment" placeholder="Apartament" required>      
+      <label for="phone">Telefon:</label>
+      <input type="tel" id="phone" placeholder="Telefon" required>
+      <label for="job">Bloc:</label>
+      <input type="text" id="job" placeholder="Job" required>
+      <label for="workplace">Loc de munca:</label>
+      <input type="text" id="workplace" placeholder="Loc de munca" required>
+      <label for="diagnosis">Diagnostic:</label>
+      <input type="text" id="diagnosis" placeholder="Diagnostic" required>
+      <label for="other_observations">Alte Observatii:</label>
+      <textarea type="text" id="other_observations" placeholder="Alte Observatii" required></textarea>
+      <label for="corridor">Coridor:</label>
+      <input type="text" id="corridor" placeholder="Coridor" required>
+      <label for="room_number">Număr cameră:</label>
+      <input type="text" id="room_number" placeholder="Număr cameră" required>
+      <label for="bed_number">Număr pat:</label>
+      <input type="text" id="bed_number" placeholder="Număr pat" required>
+      <div id="edit-patient-btn">
+        <button type="submit">Save</button>
+        <button type="button" id="cancel-button">Cancel</button>
+      </div>
+    </form>
+  </div>
+</body>
+<script type="module" src="./logoutButton.js"></script>
+<script type="module" src="./home.js"></script>
+<script type="module" src="./patients.js"></script>
+</html>
