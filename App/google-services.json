@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "838200490111",
+    "firebase_url": "https://heal-hustler-default-rtdb.firebaseio.com",
+    "project_id": "heal-hustler",
+    "storage_bucket": "heal-hustler.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:838200490111:android:bb78e7de85c8dd38bae74a",
+        "android_client_info": {
+          "package_name": "com.healhustler.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA29UYAOK3by6-prF4hYosFbAzImsKqoCs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
