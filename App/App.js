@@ -1,10 +1,17 @@
 import React, { useState }  from 'react';
 
 import { StatusBar } from 'expo-status-bar';
-import { View, Text, StyleSheet, Button, Alert, TextInput } from 'react-native';
+import { View, KeyboardAvoidingView, Text, StyleSheet, Button, Alert, TextInput } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import auth from '@react-native-firebase/auth';
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+
+import app, { db, db_firestore } from './firebaseConfig';
+
+import {getAuth,signInWithEmailAndPassword,createUserWithEmailAndPassword} from 'firebase/auth';
+import {ref, set } from "firebase/database";
+import { addDoc, collection } from "firebase/firestore";
+
 
 const Stack = createStackNavigator();
 
@@ -36,15 +43,36 @@ const HomeScreen = ({ navigation }) => {
 const LogInScreen = ({ navigation }) => {
   const [textEmail, setText1] = useState('');
   const [textParola, setText2] = useState('');
+ 
+    const [showPassword, setShowPassword] = useState(false); 
+  
+    const toggleShowPassword = () => { 
+        setShowPassword(!showPassword); 
+    };
+
+  const auth = getAuth(app);
+
+  const signInUser = async (email, password) => {
+    try {
+      await signInWithEmailAndPassword(auth,textEmail,textParola);
+      Alert.alert("Autentificare realizata cu succes!");
+      console.log('User signed in!');
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const handleCreateButtonPress = () => {
-    // if(textEmail && textParola)
-    //   {
-    //     try{
-    //       const response = awai
-    //     }
-    //   }
-    navigation.navigate('ModeScreen');
+    if(textEmail && textParola)
+      {
+        signInUser(textEmail,textParola);
+        navigation.navigate('ModeScreen');
+      }
+    else
+    {
+      Alert.alert("Datele sunt introduse gresit!");
+    }
+    
   };
 
   return (
@@ -54,41 +82,87 @@ const LogInScreen = ({ navigation }) => {
         <View style={styles.textContainer}>
           <Text style={styles.underText}>MAKING THE WORLD BETTER</Text>
         </View>
-      </View>
 
-      <View style={styles.buttonWrapper}>
+        <View style={styles.buttonWrapper}>
         <View style={styles.inputWrapper}>
           <TextInput
             style={styles.input}
-            placeholder="Nume de utilizator"
+            placeholder="Email"
             onChangeText={setText1}
             value={textEmail}
+            autoCapitalize='none'
           />
-          <TextInput
-            style={styles.input}
-            placeholder="Parola"
-            onChangeText={setText2}
-            value={textParola}
-          />
+          <View style={styles.parola}>
+            <TextInput
+              secureTextEntry={!showPassword} 
+              style={styles.input}
+              placeholder="Parola"
+              onChangeText={setText2}
+              value={textParola}
+              autoCapitalize='none'
+            />
+            <MaterialCommunityIcons 
+                      name={showPassword ? 'eye-off' : 'eye'} 
+                      size={24} 
+                      color="#378CE7"
+                      style={styles.icon} 
+                      onPress={toggleShowPassword} 
+              />
+          </View>
         </View>
 
         <View style={styles.button4Container}>
           <Button title="LOG IN" onPress={handleCreateButtonPress}  color="#378CE7"/>
         </View>
       </View>
+      </View>
     </View>
   );
 };
 
 const CreateAccountScreen = ({ navigation }) => {
-  const [textNume, setText1] = useState('');
-  const [textN, setText2] = useState('');
-  const [textP, setText3] = useState('');
-  const [textParola, setText4] = useState('');
+  const [textEmail, setEmail] = useState('');
+  const [textNume, setNume] = useState('');
+  const [textParola, setParola] = useState('');
+  const textPrivilage = "asistenta";
+
+  const [showPassword, setShowPassword] = useState(false); 
+  
+  const toggleShowPassword = () => { 
+    setShowPassword(!showPassword); 
+  };
+
+  const auth = getAuth(app);
+
+  const registerUser = async () => {
+    try {
+      await createUserWithEmailAndPassword(auth,textEmail,textParola);
+      const response = await signInWithEmailAndPassword(auth,textEmail,textParola);
+
+      set(ref(db, 'users/' + response.user.uid), {
+        email: textEmail,
+        full_name : textNume,
+        privilage: textPrivilage
+      })
+      .then(() =>{
+        Alert.alert('Contul a fost creat cu succes!');
+      }
+      )
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  
 
   const handleCreateButtonPress = () => {
-    Alert.alert('Account created!');
-    navigation.navigate('Home');
+    if(textEmail && textParola && textNume)
+      {
+        registerUser(auth,textEmail,textParola)
+        navigation.navigate('ModeScreen');
+      }
+      else{
+        Alert.alert("Date introduse gresit!");
+      }
   };
 
   return (
@@ -104,28 +178,34 @@ const CreateAccountScreen = ({ navigation }) => {
         <View style={styles.inputWrapper}>
           <TextInput
             style={styles.input}
-            placeholder="Nume de utilizator"
-            onChangeText={setText1}
+            placeholder="Email"
+            onChangeText={setEmail}
+            value={textEmail}
+            autoCapitalize='none'
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Nume complet"
+            onChangeText={setNume}
             value={textNume}
           />
-          <TextInput
-            style={styles.input}
-            placeholder="Nume"
-            onChangeText={setText2}
-            value={textN}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Prenume"
-            onChangeText={setText3}
-            value={textP}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Parola"
-            onChangeText={setText4}
-            value={textParola}
-          />
+          <View style={styles.parola}>
+            <TextInput
+              secureTextEntry={!showPassword} 
+              style={styles.input}
+              placeholder="Parola"
+              onChangeText={setParola}
+              value={textParola}
+              autoCapitalize='none'
+            />
+            <MaterialCommunityIcons 
+                      name={showPassword ? 'eye-off' : 'eye'} 
+                      size={24} 
+                      color="#378CE7"
+                      style={styles.icon} 
+                      onPress={toggleShowPassword} 
+              />
+          </View>
         </View>
         
 
@@ -172,9 +252,27 @@ const NewTransportScreen = ({ navigation }) => {
   const [textPrenumePacient, setText2] = useState('');
   const [textCNPPacient, setText3] = useState('');
 
+  const newTransport = async () => {
+
+      try {
+        const docRef = await addDoc(collection(db_firestore, "Requests"), {
+        CNP: textCNPPacient,
+        Nume: textNumePacient,
+        Prenume: textPrenumePacient
+      });
+      Alert.alert("Cerere inregistrata cu id: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+
+  }
+
   const handleRequestButtonPress = () => {
-    Alert.alert('Cererea a fost trimisa!');
-    navigation.navigate('ModeScreen');
+    if(textCNPPacient && textNumePacient && textPrenumePacient)
+      {
+        newTransport();
+        navigation.navigate('ModeScreen');
+      }
   };
 
   return(
@@ -283,6 +381,7 @@ const App = () => {
 const styles = StyleSheet.create({
   //Home screen
   container: {
+    overflow: 'hidden',
     flex: 1,
     backgroundColor: '#EEEDEB',
     alignItems: 'center',
@@ -351,6 +450,15 @@ const styles = StyleSheet.create({
   inputWrapper: {
     marginTop: 80,
     marginBottom: 40,
+  },
+  icon: { 
+    marginLeft: 10, 
+    marginTop: 20,
+  },
+  parola: {
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    justifyContent: 'center',
   },
   input: {
     height: 40,
